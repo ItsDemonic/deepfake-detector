@@ -6,7 +6,7 @@ This project aims to implement a deepfake detection system using deep learning t
 
 The project utilizes the following technologies and libraries:
 
-- **Deep Learning Framework:** TensorFlow
+- **Deep Learning Framework:** PyTorch
 - **Image Processing:** OpenCV (`opencv-python`), Pillow (`pillow`)
 - **Web API Framework:** FastAPI
 - **ASGI Server:** Uvicorn

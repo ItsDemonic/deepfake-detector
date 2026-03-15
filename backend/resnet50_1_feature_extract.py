@@ -19,7 +19,8 @@ LR = 1e-3
 WEIGHT_DECAY = 1e-4
 EPOCHS = 10
 
-MODEL_STAGE1_PATH = "model_stage1.pt"
+MODEL_STAGE1_PATH = "resnet50_feature_extract.pt"
+
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -53,17 +54,17 @@ valid_loader = DataLoader(valid_data, batch_size = BATCH_SIZE, shuffle = False, 
 
 # Model
 
-model = timm.create_model("tf_efficientnetv2_m.in1k", pretrained=True, num_classes=2)
-model.classifier = nn.Sequential(
+model = timm.create_model("resnet50", pretrained=True, num_classes=2)
+model.fc = nn.Sequential(
     nn.Dropout(0.5),
-    nn.Linear(model.classifier.in_features, 2)
+    nn.Linear(model.fc.in_features, 2)
 )
 model = model.to(device)
 
 # Freezing the backbone
 
 for name, p in model.named_parameters():
-    if "classifier" not in name:
+    if "fc" not in name:
         p.requires_grad = False
 
 criterion = nn.CrossEntropyLoss()
@@ -90,7 +91,7 @@ for epoch in range(EPOCHS):
         train_correct += (preds==labels).sum().item()
         train_total += labels.size(0)
     
-    train_acc = train_correct/train_total
+    train_acc = train_correct/train_total * 100
 
     # Validation
     model.eval()
@@ -104,10 +105,10 @@ for epoch in range(EPOCHS):
             _, preds = torch.max(outputs, 1)
             val_correct += (preds == labels).sum().item()
             val_total += labels.size(0)
-    val_acc = val_correct / val_total
+    val_acc = val_correct / val_total * 100
 
 
-    print(f"Epoch {epoch+1} | Train acc: {train_acc:.4f} | Val Acc: {val_acc:.4f}")
+    print(f"Epoch {epoch+1} | Train acc: {train_acc:.4f}% | Val Acc: {val_acc:.4f}%")
 
 torch.save(model.state_dict(), MODEL_STAGE1_PATH)
 print("Stage 1 model saved:", MODEL_STAGE1_PATH)

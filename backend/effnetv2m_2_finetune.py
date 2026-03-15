@@ -17,8 +17,8 @@ LR_FINE       = 1e-5
 WEIGHT_DECAY  = 1e-4
 EPOCHS_FINE   = 10
 
-MODEL_STAGE1_PATH = "model_stage1.pt"
-MODEL_STAGE2_PATH = "model_stage2.pt"
+MODEL_STAGE1_PATH = "effnetv2m_feature_extract.pt"
+MODEL_STAGE2_PATH = "effnetv2m_finetuned.pt"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -60,7 +60,7 @@ model = model.to(device)
 # LOAD ORIGINAL WEIGHTS
 model.load_state_dict(torch.load(MODEL_STAGE1_PATH))
 
-# F AND UF HEHE
+# F AND UF
 # Freeze
 for param in model.parameters():
     param.requires_grad = False

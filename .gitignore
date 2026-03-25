@@ -6,3 +6,4 @@ __pycache__/
 dataset/archive.zip
 dataset/
 model/
+results/

@@ -46,7 +46,7 @@ train_loader = DataLoader(train_data, batch_size=BATCH_SIZE, shuffle=True, num_w
 valid_loader = DataLoader(valid_data, batch_size=BATCH_SIZE, shuffle=False, num_workers=4, pin_memory=True)
 
 # Model
-model = timm.create_model("xception",
+model = timm.create_model("xception",``
                           pretrained=True, num_classes=2)
 
 # Replace classifier

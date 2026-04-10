@@ -12,7 +12,7 @@ from tqdm import tqdm
 BASE_DIR = "dataset/real_vs_fake/real-vs-fake"
 TEST_DIR = os.path.join(BASE_DIR, "test")
 
-MODEL_PATH = "model_stage2.pt"
+MODEL_PATH = "effnetv2m_finetuned.pt"
 
 BATCH_SIZE = 32
 

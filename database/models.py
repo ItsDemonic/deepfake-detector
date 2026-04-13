@@ -19,4 +19,9 @@ class images(Base):
     uploaded_at = Column(DateTime, default=datetime.utcnow)
     user_id = Column(Integer,ForeignKey("Users.user_id"))
     user = relationship("users",back_populates="image")
-    
+
+class UnauthenticatedUploads(Base):
+    __tablename__ = "UnauthenticatedUploads"
+    id = Column(Integer, primary_key=True, index=True)
+    ip_address = Column(String, index=True, nullable=False)
+    uploaded_at = Column(DateTime, default=datetime.utcnow)

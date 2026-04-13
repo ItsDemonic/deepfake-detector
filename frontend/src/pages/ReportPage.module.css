@@ -1,0 +1,518 @@
+.page {
+  min-height: calc(100vh - 72px);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 3rem 2.5rem;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.danger {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.safe {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+.scoreBlock {
+  text-align: right;
+}
+
+.scoreLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.scoreValue {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  margin-top: 0.25rem;
+}
+
+.percent {
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.divider {
+  font-size: 3rem;
+  font-weight: 300;
+  color: #38e8ff;
+  margin-left: 0.5rem;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.imageViewer {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlayText {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.imagePlaceholder {
+  flex: 1;
+  background: radial-gradient(circle, #2a3441 0%, #17202b 100%);
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageBox {
+  width: 80%;
+  height: 80%;
+  background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .03) 25%, rgba(255, 255, 255, .03) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .03) 75%, rgba(255, 255, 255, .03) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .03) 25%, rgba(255, 255, 255, .03) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .03) 75%, rgba(255, 255, 255, .03) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  position: relative;
+}
+
+.mockupOverlay {
+  position: absolute;
+  inset: 0;
+}
+
+.boundingBox1 {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 15%;
+  border: 1px dashed #38e8ff;
+  background-color: rgba(56, 232, 255, 0.05);
+}
+
+.boundingBox2 {
+  position: absolute;
+  top: 60%;
+  left: 35%;
+  width: 30%;
+  height: 20%;
+  border: 1px dashed #f87171;
+  background-color: rgba(239, 68, 68, 0.05);
+  border-radius: 50%;
+}
+
+.boundText {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.actualImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  z-index: 5;
+}
+
+.viewerToolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg-card-hover);
+}
+
+.toolbarLeft {
+  display: flex;
+  gap: 1rem;
+}
+
+.toolbarLeft button {
+  background: none;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+
+.toolbarLeft button:hover {
+  color: #ffffff;
+}
+
+.toolbarRight {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+}
+
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.metaCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.metaCard h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.metaLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.metaValue {
+  font-size: 0.875rem;
+  color: #e2e8f0;
+}
+
+.metaIcon {
+  color: #38e8ff;
+}
+
+.threatAssessment {
+  margin-top: 1rem;
+}
+
+.threatBarWrapper {
+  height: 6px;
+  background-color: var(--color-bg-2);
+  border-radius: 3px;
+  margin: 0.75rem 0;
+  overflow: hidden;
+}
+
+.threatBarFull {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #ef4444);
+}
+
+.threatNote {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.vaultCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.vaultIconWrapper {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(56, 232, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: #38e8ff;
+}
+
+.vaultCard h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.vaultCard p {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.vaultBtn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+
+.vaultBtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.metricCard {
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+
+.metricHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.failStatus {
+  color: #f87171;
+}
+
+.nominalStatus {
+  color: #34d399;
+}
+
+.highStatus {
+  color: #f87171;
+}
+
+.metricDesc {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  margin-top: 1.5rem;
+}
+
+.chartMockup {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 60px;
+}
+
+.barWrap {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  background-color: rgba(255,255,255,0.02);
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  background-color: rgba(255,255,255,0.1);
+}
+
+.barHighlight1 {
+  width: 100%;
+  background-color: #38e8ff;
+}
+
+.barHighlight2 {
+  width: 100%;
+  background-color: #f87171;
+}
+
+.ocularMockup {
+  display: flex;
+  gap: 1rem;
+}
+
+.ocLeft, .ocRight {
+  flex: 1;
+}
+
+.ocLabel {
+  display: block;
+  font-size: 0.5rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.ocBar {
+  height: 4px;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 2px;
+}
+
+.ocFill {
+  height: 100%;
+  background-color: #38e8ff;
+}
+
+.tagGroup {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.dangerTag {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.neutralTag {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.5rem 3rem;
+  background-color: #070b10;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  margin-top: 3rem;
+}
+
+.footerBrand strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.footerBrand p {
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footerLinks a {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  transition: color 0.2s;
+}
+
+.footerLinks a:hover {
+  color: #38e8ff;
+}

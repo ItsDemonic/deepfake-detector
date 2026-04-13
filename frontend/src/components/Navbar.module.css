@@ -2,150 +2,85 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(6, 10, 15, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+  border-bottom: 1px solid transparent;
+  padding: 1.25rem 2.5rem;
 }
 
 .inner {
-  max-width: 1120px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
-  height: 60px;
   display: flex;
   align-items: center;
-  gap: 24px;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
-  text-decoration: none;
-}
-
-.logoIcon {
-  width: 34px;
-  height: 34px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  justify-content: space-between;
 }
 
 .logoText {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 1rem;
   letter-spacing: -0.02em;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .nav {
   display: flex;
+  gap: 2.5rem;
   align-items: center;
-  gap: 4px;
-  flex: 1;
 }
 
 .navLink {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--radius-md);
-  font-size: 14px;
-  font-weight: 500;
   color: var(--color-text-secondary);
-  transition: all var(--transition);
+  font-size: 0.8rem;
+  font-weight: 500;
   text-decoration: none;
+  transition: color 0.2s;
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid transparent;
 }
 
 .navLink:hover {
-  color: var(--color-text);
-  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
 .navLink.active {
-  color: var(--color-primary-light);
-  background: var(--color-primary-glow);
+  color: #ffffff;
+  border-bottom: 2px solid #38e8ff;
 }
 
 .actions {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-left: auto;
+  gap: 1.5rem;
 }
 
-.userChip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  background: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  font-size: 13px;
+.authLink {
+  color: #ffffff;
+  font-size: 0.8rem;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-.logoutBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text-muted);
-  transition: all var(--transition);
+.authLink:hover {
+  color: #38e8ff;
 }
 
-.logoutBtn:hover {
-  background: var(--color-danger-bg);
-  border-color: rgba(239, 68, 68, 0.3);
-  color: var(--color-danger-light);
+.getStartedBtn {
+  background: var(--gradient-primary);
+  color: #0b111a;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
 }
 
-.authLinks {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.signupBtn {
-  padding: 7px 16px;
-  background: var(--color-primary);
-  color: #fff;
-  border-radius: var(--radius-md);
-  font-size: 13px;
-  font-weight: 500;
-  transition: all var(--transition);
-}
-
-.signupBtn:hover {
-  background: var(--color-primary-light);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+.getStartedBtn:hover {
+  filter: brightness(1.1);
   transform: translateY(-1px);
-}
-
-@media (max-width: 640px) {
-  .inner {
-    padding: 0 16px;
-    gap: 12px;
-  }
-  .logoText {
-    display: none;
-  }
-  .userChip span {
-    display: none;
-  }
 }

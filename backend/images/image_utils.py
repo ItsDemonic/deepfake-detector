@@ -39,7 +39,8 @@ def predict_image(image_tensor, device,model):
     image_tensor = image_tensor.to(device)
     with torch.no_grad():
         outputs = model(image_tensor)
-        _, pred = torch.max(outputs, 1)
+        probabilities = torch.nn.functional.softmax(outputs, dim=1)
+        confidence, pred = torch.max(probabilities, 1)
     
     class_names = ["Fake", "Real"]  # adjust if dataset labels differ
-    return class_names[pred.item()]
+    return class_names[pred.item()], round(confidence.item() * 100, 2)

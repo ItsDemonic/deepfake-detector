@@ -1,67 +1,58 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ShieldCheck, LogOut, User, Clock } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import styles from './Navbar.module.css';
 
 export function Navbar() {
-  const { user, logout } = useAuth();
+  const { user, setToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
+  if (location.pathname === '/login') {
+    return null;
+  }
+
   function handleLogout() {
-    logout();
+    setToken('');
     navigate('/login');
   }
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <motion.header
-      className={styles.header}
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-    >
+    <header className={styles.header}>
       <div className={styles.inner}>
-        <Link to="/" className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <ShieldCheck size={18} strokeWidth={2.5} />
-          </div>
-          <span className={styles.logoText}>DeepGuard</span>
-        </Link>
+        <div className={styles.leftGroup}>
+          <Link to="/" className={styles.logoText}>
+            SOVEREIGN ARCHITECT
+          </Link>
+        </div>
 
-        {user && (
-          <nav className={styles.nav}>
-            <Link to="/" className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}>
-              Detect
-            </Link>
-            <Link to="/history" className={`${styles.navLink} ${isActive('/history') ? styles.active : ''}`}>
-              <Clock size={14} />
-              History
-            </Link>
-          </nav>
-        )}
+        <nav className={styles.nav}>
+          <Link to="/" className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}>
+            Product
+          </Link>
+          <Link to="/architecture" className={`${styles.navLink} ${isActive('/architecture') ? styles.active : ''}`}>
+            Developers
+          </Link>
+          <Link to="/mission" className={`${styles.navLink} ${isActive('/mission') ? styles.active : ''}`}>
+            Company
+          </Link>
+        </nav>
 
         <div className={styles.actions}>
           {user ? (
             <>
-              <div className={styles.userChip}>
-                <User size={14} />
-                <span>{user.username}</span>
-              </div>
-              <button className={styles.logoutBtn} onClick={handleLogout} title="Logout">
-                <LogOut size={15} />
-              </button>
+              <button className={styles.authLink} onClick={handleLogout}>Sign Out</button>
+              <Link to="/" className={styles.getStartedBtn}>Dashboard</Link>
             </>
           ) : (
-            <div className={styles.authLinks}>
-              <Link to="/login" className={styles.navLink}>Sign in</Link>
-              <Link to="/signup" className={styles.signupBtn}>Get started</Link>
-            </div>
+            <>
+              <Link to="/login" className={styles.authLink}>Sign In</Link>
+              <Link to="/login" className={styles.getStartedBtn}>Get Started</Link>
+            </>
           )}
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

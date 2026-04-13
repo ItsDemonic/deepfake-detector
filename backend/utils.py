@@ -30,10 +30,12 @@ def verify_password(password:str,hashed_password:str):
     return pwd_context.verify(password,hashed_password)
 
 oAuth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+oAuth2_scheme_optional = OAuth2PasswordBearer(tokenUrl="/auth/login", auto_error=False)
+
 def create_access_token(data:dict):
     to_encode = data.copy()
-    to_encode["exp"] = datetime.now(timezone.utc) + timedelta(minutes=int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")))
-    encoded_jwt = jwt.encode(to_encode,os.getenv("SECRET_KEY"),algorithm=os.getenv("ALGORITHM"))
+    to_encode["exp"] = datetime.now(timezone.utc) + timedelta(minutes=int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30")))
+    encoded_jwt = jwt.encode(to_encode,os.getenv("SECRET_KEY", "supersecret"),algorithm=os.getenv("ALGORITHM", "HS256"))
     return encoded_jwt
 
 def get_current_user(token: str = Depends(oAuth2_scheme),db: Session = Depends(get_db)):
@@ -43,7 +45,7 @@ def get_current_user(token: str = Depends(oAuth2_scheme),db: Session = Depends(g
         headers={"WWW-Authenticate": "Bearer"},
     )   
     try:
-        payload = jwt.decode(token,os.getenv("SECRET_KEY"),algorithms=os.getenv("ALGORITHM"))
+        payload = jwt.decode(token,os.getenv("SECRET_KEY", "supersecret"),algorithms=[os.getenv("ALGORITHM", "HS256")])
         user_name = payload.get("username")
         user_id = payload.get("user_id")
         if user_name is None or user_id is None:
@@ -55,8 +57,22 @@ def get_current_user(token: str = Depends(oAuth2_scheme),db: Session = Depends(g
         raise credentials_exception
     return user
 
+def get_optional_current_user(token: str = Depends(oAuth2_scheme_optional), db: Session = Depends(get_db)):
+    if not token:
+        return None
+    try:
+        payload = jwt.decode(token,os.getenv("SECRET_KEY", "supersecret"),algorithms=[os.getenv("ALGORITHM", "HS256")])
+        user_name = payload.get("username")
+        if user_name is None:
+            return None
+    except JWTError:
+        return None
+    user = check_user_by_username(user_name,db)
+    return user
 
-def load_model(MODEL_STAGE1_PATH = r"C:\Users\acer\Desktop\Personal_projects\deepfake_2\mobilenet_finetuned.pt", device="cpu"):
+def load_model(MODEL_STAGE1_PATH=None, device="cpu"):
+    if MODEL_STAGE1_PATH is None:
+        MODEL_STAGE1_PATH = os.path.join(os.path.dirname(__file__), "..", "mobilenet_finetuned.pt")
     print("[INFO] Initializing model creation...")
     model = timm.create_model("mobilenetv3_large_100", pretrained=True, num_classes=2)
     print("[INFO] Model created successfully.")

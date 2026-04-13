@@ -165,23 +165,23 @@ sequenceDiagram
 This diagrams out how user and asset metadata is structured alongside internal systems.
 
 ```mermaid
-architecture-beta
+flowchart TD
     %% Services
-    service client(internet)[Client / Frontend]
-    service server(server)[FastAPI Server]
+    client([Client / Frontend])
+    server[FastAPI Server]
     
     %% Databases & Storage
-    service db(database)[Relational DB: Users & image metadata]
-    service tempdisk(disk)[Temporary Filesystem]
-    service bucket(cloud)[Blob Bucket for Images]
-    service weights(disk)[.pt Model Weights]
+    db[(Relational DB: Users & image metadata)]
+    tempdisk[(Temporary Filesystem)]
+    bucket[(Blob Bucket for Images)]
+    weights[(.pt Model Weights)]
 
     %% Connections
-    client:R -- L:server
-    server:T -- B:db
-    server:B -- T:tempdisk
-    server:R -- L:bucket
-    server:L -- R:weights
+    client <--> server
+    server <--> db
+    server <--> tempdisk
+    server <--> bucket
+    server <--> weights
 ```
 
 *(Below is the Entity-Relationship flow for strict database data architecture.)*

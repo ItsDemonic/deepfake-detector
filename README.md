@@ -37,14 +37,14 @@ pip install -r requirements.txt
 ### 1. Overall Architecture
 ```mermaid
 graph TD
-    UI[Frontend Client] -->|1. Auth (Signup/Login)| API[FastAPI Server]
-    API <-->|2. JWT & User Data| DB[(Relational Database)]
-    UI -->|3. Upload Image + JWT| API
-    API -->|4. Save Temporarily| Storage[(Local Disk)]
-    API -->|5. Resize & Normalize (PIL, Torchvision)| CV[Image Preprocessing]
-    CV -->|6. Normalized Image Tensors| DL[PyTorch Inference Engine - MobileNetV3]
-    DL -->|7. Real/Fake Classification| API
-    API -->|8. Detection Result Report| UI
+    UI[Frontend Client] -->|"1. Auth (Signup/Login)"| API[FastAPI Server]
+    API <-->|"2. JWT & User Data"| DB[(Relational Database)]
+    UI -->|"3. Upload Image + JWT"| API
+    API -->|"4. Save Temporarily"| Storage[(Local Disk)]
+    API -->|"5. Resize & Normalize (PIL, Torchvision)"| CV[Image Preprocessing]
+    CV -->|"6. Normalized Image Tensors"| DL[PyTorch Inference Engine - MobileNetV3]
+    DL -->|"7. Real/Fake Classification"| API
+    API -->|"8. Detection Result Report"| UI
 ```
 
 ### 2. Activity Flow Diagram
